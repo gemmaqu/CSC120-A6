@@ -18,9 +18,9 @@ public class Passenger implements PassengerRequirements{
         if (c.addPassenger(this)) {
             System.out.println("I am on the car");
         }
-    else {
-        System.out.println("I don't want to get on the car");
-    }
+        else {
+            System.out.println("I don't want to get on the car");
+        }
     }
 
     public void getOffCar(Car c){

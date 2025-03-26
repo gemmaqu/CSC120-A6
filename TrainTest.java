@@ -1,12 +1,11 @@
-
 import java.lang.classfile.AnnotationValue;
-import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertEquals;
 import java.util.ArrayList;
 //import static org.junit.Assert.*;
 import org.junit.Test;
+import static org.juint.assertTrue;
 
 
 public class TrainTest {
@@ -17,10 +16,8 @@ public class TrainTest {
         Engine engine = new Engine(FuelType.ELECTRIC, 30, 100);
         FuelType expectedFuelType = FuelType.ELECTRIC;
         double expectedcurrentfuellevel = 30;
-        FuelType actuaFuelType = engine.getFuelType();
-        double actualcurrentfuellevel = engine.getCurrentFuel();
-        assertEquals(expectedFuelType, actuaFuelType);
-        assertEquals(expectedcurrentfuellevel, actualcurrentfuellevel, 0.001);
+        assertEquals(expectedFuelType, engine.getFuelType());
+        assertEquals(expectedcurrentfuellevel, engine.getCurrentFuel(), 0.001);
 
     
     }
@@ -73,8 +70,11 @@ public class TrainTest {
     public void testPassengerBoardCarWithSpace() {
         Car car1 = new Car(2);
         Passenger one = new Passenger("John");
-        one.boardCar(car1);  
-        assertTrue(car1.containsPassenger(one));
+        assertTrue(one.boardCar(car1), "Passenger should successfully board the car when seats are available");
+         
+        assertEquals(1, car1.seatsRemaining(), "Available seats should decrease after boarding");
+       
+    }
 
 
     }
@@ -83,29 +83,40 @@ public class TrainTest {
     public void testPassengerBoardCarFull() {
         Car car2 = new Car(1);
         Passenger two = new Passenger("Ava");
-        two.boardCar(car2);
-        assertFalse(car2.containsPassenger(two));
+        Passenger three = new Passenger("John");
+        assertTrue(two.boardCar(car2)); //should be able to board on car
+        assertFalse(three.boardCar(car2));  //the second passenger should not board on car
+        assertEquals(0, Car.seatsRemaining());
         }
 
     // Train Tests
     @Test
     public void testTrainConstructor() {
-        
+        Train train = new Train(FuelType.ELECTRIC, 10,5,2,6);
+        assertEquals(5, train.getancar());
     }
 
     @Test
     public void testTrainPassengerCount() {
-        fail();
-    }
+        Train traintwo = new Train(FuelType.ELECTRIC, 10, 5, 2, 6);
+        Passenger first = new Passenger("Jane");
+        Car anewCar = new Car(1);
+        first.boardCar(anewCar);
+        assertEquals(1,traintwo.seatsRemaining());
 
     @Test
     public void testTrainGetCar() {
-        fail();
+        Train trainthree = new Train(FuelType.ELECTRIC, 10, 5, 2, 5);
+        Passenger pthree = new Passenger("Alice");
+        trainthree.getCar(2).addPassenger(pthree);
+        assertFalse(trainthree.getCar(2).addPassenger(pthree));
+
+
     }
 
     @Test
     public void testTrainPrintManifest() {
-        fail();
+       
     }
     
 }

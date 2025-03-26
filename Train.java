@@ -32,6 +32,9 @@ public class Train implements TrainRequirements{
         }
     }
 
+    public int getancar(){
+        return cars.size();
+    }
 
     public int getMaxCapacity() {
         int totalCapacity = 0;
