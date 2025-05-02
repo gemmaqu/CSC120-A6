@@ -28,7 +28,7 @@ public class Car implements CarRequirements{
     }
 
     public Boolean addPassenger(Passenger p){
-        if (seatsRemaining() > 0 && this.Passengeronboard.contains(p)){
+        if (seatsRemaining() > 0 && !this.Passengeronboard.contains(p)){
             this.Currentpassengers += 1;
             this.Passengeronboard.add(p);
             return Boolean.TRUE;    
